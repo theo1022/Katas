@@ -19,7 +19,7 @@ namespace Scheduler
 
             foreach (var caseWorker in _scheduler.CaseWorkers)
             {
-                CaseWorkerVisualSchedule caseWorkerVisualSchedule = new CaseWorkerVisualSchedule(caseWorker);
+                CaseWorkerVisualSchedule caseWorkerVisualSchedule = new CaseWorkerVisualSchedule(caseWorker, RefreshFreeSpotsLabel);//2. Delsvar 6 + 7, metoden skickas in som parameter
                 caseWorkerVisualSchedule.Size = new Size(500, 400);
 
                 flowLayoutPanel_CaseWorkerSchedules.Controls.Add(caseWorkerVisualSchedule);
@@ -43,7 +43,7 @@ namespace Scheduler
                 visualSchedule.RefreshDisplayedMeetings();
             }
         }
-        private void RefreshFreeSpotsLabel()
+        private void RefreshFreeSpotsLabel()//1. Delsvar 6 + 7, denna metoden ska köras från annan klass.
         {
             int availableSpots = 0;
             foreach (CaseWorker caseWorker in _scheduler.CaseWorkers)

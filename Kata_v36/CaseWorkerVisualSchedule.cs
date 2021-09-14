@@ -15,10 +15,11 @@ namespace Scheduler
     public partial class CaseWorkerVisualSchedule : UserControl
     {
         private readonly CaseWorker _caseWorker;
-
-        public CaseWorkerVisualSchedule(CaseWorker caseWorker)
+        private readonly Action _meetingAddedHandler;//3. Delsvar 6 + 7, en variabel skapas med hjälp av action för att hålla metoden
+        public CaseWorkerVisualSchedule(CaseWorker caseWorker, Action meetingAddedHandler)//4. Delsvar 6 + 7, Andra parametern kallar på metoden från mainform
         {
             _caseWorker = caseWorker;
+            _meetingAddedHandler = meetingAddedHandler;//5. Delsvar 6 + 7, metoden läggs som värde till den lokala variabeln
             InitializeComponent();
 
             label_CaseWorkerName.Text = _caseWorker.Name;
@@ -50,6 +51,7 @@ namespace Scheduler
             {
                 _caseWorker.NewDateAdded(dateTimePicker.Value);
                 RefreshDisplayedMeetings();
+                _meetingAddedHandler();//Svar 6 + 7, metoden körs från referens variabeln
             }
             catch (MeetingOverlapException exception)
             {
